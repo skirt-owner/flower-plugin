@@ -1,96 +1,48 @@
-# Obsidian Sample Plugin
+# 🌻 Obsidian Flower Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+This is a Obsidian Custom Plugin that generates random flowers based on the simplex noise. Idea and algorithm from [benfred repo](https://github.com/benfred/simplex-flowers).
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+## Getting Started
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+### 🗿 Users
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+1. Download [source code](https://github.com/skirt-owner/flower-plugin/archive/refs/heads/master.zip) or [main.js](./main.js), [styles.css](./styles.css), [manifest.json](./manifest.json).
+2. Unarchive and copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/flower-plugin/`.
+3. In Obsidian, open Settings.
+4. In the side menu, select Community plugins.
+5. Select Turn on community plugins.
+6. Under Installed plugins, enable the Flower Plugin.
 
-## First time developing plugins?
+### 💻 Devs
 
-Quick starting guide for new plugin devs:
+1. Clone this repo.
+2. Unarcive and put to your vault `VaultFolder/.obsidian/plugins/flower-plugin/`
+> **_Note:_** Remeber not to test on your main vault!
+3. Make sure you have NodeJS installed.
+4. `npm i` to install dependencies.
+5. `npm run dev` to start compilation in watch mode.
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+## ⚙️ Settings Preview
 
-## Releasing new releases
+![Settings Preview](./assets/settings.png)
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+1. **`FLower Image Size (px)`** - It's the size of an image in range `[10; 1000]`
+2. **`Flower Images Folder`** - Here you can specify folder where you want to store generated images in your vault.
+> **_Note:_** For example `'flowers'` or `'assets/flowers'` - plugin will create all folders that don't exist.
+3. **`Seed from Title with Regex`** - when toggled you'll see a text field where you can specify regex string to get seed from title of a Markdown Note:
+> **_Note:_** On default the regex string will consider any first number in title as a seed.
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+![Seed from Title with Regex](./assets/seed_from_title.png)
 
-## Adding your plugin to the community plugin list
+4. **`Seed from Selection with Delimiter`** - when toggled plugin can recognize `<seed value:[1;15 digits]><delimiter><size value:[10;1000]>` selection in the note and generate a flower based in specified values (overrides settings values).
+> **_Note:_** You can also use `<seed value><delimiter>` or `<delimiter><size value>` strings, and `size value` will be used based on settings and `seed value` will be taken from title (if **`Seed from Title with Regex`** is toggled) or random one othewise.
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+![alt text](./assets/seed_with_selection.png)
 
-## How to use
+5. **`Random Seed`** - pretty straightforward but it will just use random seed value and size specified in settings.
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+> ❗❗❗ **(3) and (4) cannot be toggled when (5) is active and vice versa.**
 
-## Manually installing the plugin
+## Contact
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+For any inquiries or questions, feel free to [contact me](mailto:skirtsfield@gmail.com) or reach out on [Telegram](https://t.me/skirtsfield).
