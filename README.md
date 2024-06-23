@@ -2,6 +2,8 @@
 
 This is a Obsidian Custom Plugin that generates random flowers based on the simplex noise. Idea and algorithm from [benfred repo](https://github.com/benfred/simplex-flowers).
 
+![Preview](./assets/preview.png)
+
 ## Getting Started
 
 ### 🗿 Users
