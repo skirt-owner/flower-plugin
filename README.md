@@ -36,7 +36,7 @@ This is a Obsidian Custom Plugin that generates random flowers based on the simp
 
 ![Seed from Title with Regex](./assets/seed_from_title.png)
 
-4. **`Seed from Selection with Delimiter`** - when toggled plugin can recognize `<seed value:[1;15 digits]><delimiter><size value:[10;1000]>` selection in the note and generate a flower based in specified values (overrides settings values).
+4. **`Seed from Selection with Delimiter`** - when toggled plugin can recognize `<seed value:[1;15 digits]><delimiter><size value:[10;1000]>` selection in the note and generate a flower based on specified values (overrides settings values).
 > **_Note:_** You can also use `<seed value><delimiter>` or `<delimiter><size value>` strings, and `size value` will be used based on settings and `seed value` will be taken from title (if **`Seed from Title with Regex`** is toggled) or random one othewise.
 
 ![alt text](./assets/seed_with_selection.png)
