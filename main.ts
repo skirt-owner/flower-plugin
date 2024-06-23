@@ -45,7 +45,7 @@ export default class FlowerPlugin extends Plugin {
 	}
 
 	async onunload() {
-		console.log('Unloading plugin...')
+		console.info('Unloading plugin...');
 	}
 
 	async loadSettings() {
@@ -56,7 +56,7 @@ export default class FlowerPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
-	isTitleExists(title: string | undefined): boolean {
+	isTitleValid(title: string | undefined): boolean {
 		return title !== undefined && title !== 'Untitled';
 	}
 
@@ -67,7 +67,7 @@ export default class FlowerPlugin extends Plugin {
 		let seed: string | null = null;
 		let shouldClearSelection = false;
 
-		if (this.isTitleExists(noteName) && this.settings.seedFromTitle && this.settings.titleRegex) {
+		if (this.isTitleValid(noteName) && this.settings.seedFromTitle && this.settings.titleRegex) {
 			const regex = new RegExp(this.settings.titleRegex);
 			const match = noteName?.match(regex);
 			
@@ -213,8 +213,9 @@ class FlowerSettingTab extends PluginSettingTab {
 
     display(): void {
         const { containerEl } = this;
-
         containerEl.empty();
+
+		containerEl.createEl('h2', { text: 'Flower Plugin Settings' });
 
         new Setting(containerEl)
             .setName('Flower Image Size (px)')
